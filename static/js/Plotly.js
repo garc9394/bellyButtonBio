@@ -1,14 +1,22 @@
 function getNames() {
     var url = `/names`;
 
-    Plotly.d3.json(url, function(error, response) {
+    d3.json(url, function(error, response) {
 
         if (error) {
             return console.warn(error);
         }
 
-        var $name = response.sampleNamesList.name;
-        // document.getElementById("selDataset");
+        // response = ["BB_940", "BB_960"]
+        var select = document.getElementById("selDataset");
+  
+        for (var i = 0; i < response.length; i++) {
+            var opt = response[i];
+            var ele = document.createElement("option");
+            ele.textContent = opt;
+            ele.value = opt;
+            select.appendChild(ele);
+        }
     })
 }
 
