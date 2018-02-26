@@ -23,12 +23,15 @@ class SamplesMetadata(Base):
 # class Samples(Base):
 #     __tablename__ = "samples"
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-sampleName = "BB_940"
-sample = "940"
+# sampleName = "BB_940"
+# sample = "940"
 
-@app.route('/names')
-def names():
+@app.route("/names")
+def getNames():
     engine = create_engine('sqlite:///DataSets/belly_button_biodiversity.sqlite')
     Base.metadata.create_all(engine)
     session = Session(bind=engine)
@@ -37,6 +40,7 @@ def names():
     for name in sampleNames:
         sampleNamesList.append('BB_' + str(name.SAMPLEID))
 
+    # sampleNamesList = ["BB_940", "BB_960"]
     return jsonify(sampleNamesList)
 
 @app.route('/otu')
