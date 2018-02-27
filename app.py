@@ -20,8 +20,10 @@ class SamplesMetadata(Base):
     SAMPLEID = Column(Integer, primary_key=True)
     WFREQ = Column(Integer)
 
-# class Samples(Base):
-#     __tablename__ = "samples"
+class Samples(Base):
+        __tablename__ = "samples"
+        otu_id = Column(Integer, primary_key=True)
+        BB_940 = Column(Integer)
 
 @app.route('/')
 def index():
@@ -96,11 +98,6 @@ def wfreq(sample):
 @app.route('/samples/<sample>')
 # @app.route('/samples/BB_940')
 def samples(sample):
-    class Samples(Base):
-        __tablename__ = "samples"
-        otu_id = Column(Integer, primary_key=True)
-        BB_940 = Column(Integer)
-
     engine = create_engine('sqlite:///DataSets/belly_button_biodiversity.sqlite')
     Base.metadata.create_all(engine)
     session = Session(bind=engine)

@@ -36,18 +36,19 @@
 // }
 
 function optionChanged() {
-    var sample = document.getElementById('selDataset').value;
+    var sample = document.getElementById('selDataset'.value);
+    console.log(sample)
     // var url = "/samples/<sample>";
     var url = "/samples/BB_940";
 
-    d3.json(url, function(error, response) {
+    // d3.json(url, function(error, response) {
 
-        if (error) {
-            return console.warn(error);
-        }
+    //     if (error) {
+    //         return console.warn(error);
+    //     }
 
-        for (var i = 0; i < response.length; i++) {
-            console.log(response[i]);
-        }
-    });
+    //     for (var i = 0; i < response.length; i++) {
+    //         console.log(response[i]);
+    //     }
+    // });
 }
