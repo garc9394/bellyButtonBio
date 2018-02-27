@@ -36,5 +36,18 @@
 // }
 
 function optionChanged() {
+    var sample = document.getElementById('selDataset').value;
+    // var url = "/samples/<sample>";
+    var url = "/samples/BB_940";
 
+    d3.json(url, function(error, response) {
+
+        if (error) {
+            return console.warn(error);
+        }
+
+        for (var i = 0; i < response.length; i++) {
+            console.log(response[i]);
+        }
+    });
 }
