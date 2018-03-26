@@ -36,10 +36,13 @@
 // }
 
 function optionChanged() {
-    var sample = document.getElementById('selDataset'.value);
-    console.log(sample)
-    // var url = "/samples/<sample>";
-    var url = "/samples/BB_940";
+    // var sample = document.getElementById('selDataset'.value);
+    // console.log(sample)
+    var sampleValue = sample;
+    var sampleUrl = "/samples/";
+    // var url = "/samples/BB_940";
+
+    d3.select('#sampleSummary').selectAll('li').remove();
 
     // d3.json(url, function(error, response) {
 

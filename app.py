@@ -32,17 +32,14 @@ def getNames():
 
 @app.route('/otu')
 def otu():
+    otuDescList = []
+    otuDesc = session.execute("SELECT otu_id, lowest_taxonomic_unit_found FROM otu").fetchall()
     class OTU(Base):
         __tablename__ = "otu"
         otu_id = Column(Integer, primary_key=True)
         lowest_taxonomic_unit_found = Column(Text)
-
-    engine = create_engine('sqlite:///DataSets/belly_button_biodiversity.sqlite')
-    Base.metadata.create_all(engine)
-    session = Session(bind=engine)
-    otuDesc = session.query(OTU)
-    otuDescList = []
     for desc in otuDesc:
+        otuDescList.append(desc.otu_id)
         otuDescList.append(desc.lowest_taxonomic_unit_found)
 
     return jsonify(otuDescList)
@@ -51,11 +48,9 @@ def otu():
 # @app.route('/metadata/BB_940')
 def metadata(sample):
     sample = sample.replace("BB_", "")
+    samplesData = {}
+    samplesData = session.execute("SELECT * FROM samples_metadata WHERE SAMPLEID = sample", {"sample":sample}).fetchall()
     engine = create_engine('sqlite:///DataSets/belly_button_biodiversity.sqlite')
-    Base.metadata.create_all(engine)
-    session = Session(bind=engine)
-    samplesMetadata = session.query(SamplesMetadata).filter_by(SAMPLEID=sample)
-
     for dataField in samplesMetadata:
         samplesData = {"AGE": dataField.AGE, 
                         "BBTYPE": dataField.BBTYPE, 
