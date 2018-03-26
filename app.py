@@ -1,29 +1,17 @@
 # Import dependencies
 from flask import Flask, jsonify, render_template
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, Text, String
 from sqlalchemy.orm import Session
-from sqlalchemy import inspect
-from sqlalchemy import desc
+from sqlalchemy.ext.automap import automap_base
 
 app = Flask(__name__)
-Base = declarative_base()
 
-class SamplesMetadata(Base):
-    __tablename__ = "samples_metadata"
-    AGE = Column(Integer)
-    BBTYPE = Column(Text)
-    ETHNICITY = Column(Text)
-    GENDER = Column(Text)
-    LOCATION = Column(Text)
-    SAMPLEID = Column(Integer, primary_key=True)
-    WFREQ = Column(Integer)
+engine = create_engine('sqlite:///DataSets/belly_button_biodiversity.sqlite')
 
-class Samples(Base):
-        __tablename__ = "samples"
-        otu_id = Column(Integer, primary_key=True)
-        BB_940 = Column(Integer)
+Base = automap_base()
+Base.prepare(engine, reflect=True)
+
+session = Session(engine)
 
 @app.route('/')
 def index():
@@ -34,11 +22,8 @@ def index():
 
 @app.route("/names")
 def getNames():
-    engine = create_engine('sqlite:///DataSets/belly_button_biodiversity.sqlite')
-    Base.metadata.create_all(engine)
-    session = Session(bind=engine)
-    sampleNames = session.query(SamplesMetadata)
     sampleNamesList = []
+    sampleNames = session.execute("SELECT SAMPLEID FROM samples_metadata").fetchall()
     for name in sampleNames:
         sampleNamesList.append('BB_' + str(name.SAMPLEID))
 
