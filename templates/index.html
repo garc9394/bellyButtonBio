@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/styles.css" />
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -21,8 +22,10 @@
             <div class="col-md-2">
                 <div class="row selection">
                     <div class="col-md-12 sampleSel">
+                        <p3>Select Sample:</p3>
+                        </br>
                         <select id="selDataset" onchange="optionChanged(this.value)">
-                            <option value="" selected="selected">Select Sample</option>
+                            <option value="" selected="selected"></option>
                         </select>
                     </div>
                 </div>
