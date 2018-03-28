@@ -27,12 +27,20 @@ def getNames():
 
 @app.route('/otu')
 def otu():
+    otuIdList = []
     otuDescList = []
+    otuList = []
+    otuDict = {}
     otuDesc = session.execute("SELECT otu_id, lowest_taxonomic_unit_found FROM otu").fetchall()
     for desc in otuDesc:
+        otuIdList.append(desc.otu_id)
         otuDescList.append(desc.lowest_taxonomic_unit_found)
 
-    return jsonify(otuDescList)
+    otuDict = {"otu_ids": otuIdList, 
+                "otu_desc": otuDescList}
+    otuList.append(otuDict)
+
+    return jsonify(otuList)
 
 @app.route('/metadata/<sample>')
 def metadata(sample):
@@ -59,7 +67,7 @@ def wfreq(sample):
 
 @app.route('/samples/<sample>')
 def samples(sample):
-    sqlQuery = "SELECT otu_id, " + sample + " AS sample_value FROM samples WHERE " + sample + " > 0 ORDER BY " + sample + " DESC"
+    sqlQuery = "SELECT otu_id, " + sample + " AS sample_value FROM samples WHERE " + sample + " > 0 ORDER BY " + sample + " DESC LIMIT 10"
     sample_ids = session.execute(sqlQuery).fetchall()
 
     idsList = []

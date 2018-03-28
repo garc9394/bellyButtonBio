@@ -33,33 +33,53 @@ function optionChanged(sample) {
 
     });
 
-    // var sampleValueUrl = "/samples/";
-    var sampleValues = [19, 26, 55];
-    // d3.json(sampleValueUrl + sample, function(error, sampleIdsList) {
-    //     // for (i = 0; i < 10; i++) { 
-    //         sampleValues.push(sampleIdsList["sample_value"]);
-    //     // }
-    // });
+    var sampleValueUrl = "/samples/";
+    Plotly.d3.json(sampleValueUrl + sample, function(error, sampleIdsList) {
+        // otuIds = sampleIdsList[0].otu_ids;
+        // sampleValues = sampleIdsList[0].sample_values;
+        // console.log(otuIds);
+        // console.log(sampleValues);
+        var sampleValues = sampleIdsList[0].sample_values;
+        var labelValues = sampleIdsList[0].otu_ids;
 
-    // var namesUrl = "/otu";
-    // d3.json(namesUrl, function(error, otuDescList) {
-    //     console.log(otuDescList);
-    // });
+        var data = [{
+            values: sampleValues,
+            labels: labelValues,
+            type: 'pie'
+        }];
+        
+        var layout = {
+        height: 350,
+        width: 400
+        };
+        
+        Plotly.newPlot('pieChart', data, layout);
+    });
 
-    var labelValues = ['Residential', 'Non-Residential', 'Utility'];
+    // var testValues = [19, 26, 55];
 
-    var data = [{
-        values: sampleValues,
-        labels: labelValues,
-        type: 'pie'
-    }];
+    var namesUrl = "/otu";
+    d3.json(namesUrl, function(error, otuList) {
+        // otuIds = otuList[0].otu_ids;
+        // otuDesc = otuList[0].otu_desc;
+        // console.log(otuIds);
+        // console.log(otuDesc);
+    });
+
+    // var labelValues = ['Residential', 'Non-Residential', 'Utility'];
+
+    // var data = [{
+    //     values: testValues,
+    //     labels: labelValues,
+    //     type: 'pie'
+    // }];
     
-    var layout = {
-    height: 350,
-    width: 400
-    };
+    // var layout = {
+    // height: 350,
+    // width: 400
+    // };
     
-    Plotly.newPlot('pieChart', data, layout);
+    // Plotly.newPlot('pieChart', data, layout);
 
     // var sampleValueUrl = "/samples/"
 
@@ -87,8 +107,8 @@ function optionChanged(sample) {
     // });
 
     // var namesUrl = "/otu";
-    // d3.json(namesUrl, function(error, otuDescList) {
-    //     console.log(otuDescList);
+    // d3.json(namesUrl, function(error, otuList) {
+    //     console.log(otuList);
     // });
 
     // var sampleUrl = "/metadata/";
