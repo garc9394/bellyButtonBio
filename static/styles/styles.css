@@ -1,0 +1,39 @@
+.title {
+    height: 200px;
+    background: lightgrey;
+    padding-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.sampleSel {
+    height: 60px;
+    width: 160px;
+    background: lightgrey;
+    border: 1px;
+    border-color: darkgrey;
+    margin: 15px;
+    padding-top: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#sampleSummary {
+    width: 160px;
+    border: 1px;
+    border-color: steelblue;
+    margin: 15px;
+    padding-top: 5px;
+    padding-left: 6px;
+    font-weight: bold;
+    font-size: 9px;
+    list-style-type: none;
+}
+
+#sampleSummary p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    background-color: steelblue;
+}
