@@ -74,7 +74,7 @@ def wfreq(sample):
 
 @app.route('/samples/<sample>')
 def samples(sample):
-    sqlQuery = "SELECT otu_id, " + sample + " AS sample_value FROM samples WHERE " + sample + " > 0 ORDER BY " + sample + " DESC LIMIT 10"
+    sqlQuery = "SELECT otu_id, " + sample + " AS sample_value FROM samples WHERE " + sample + " > 0 ORDER BY " + sample + " DESC"
     sample_ids = session.execute(sqlQuery).fetchall()
 
     idsList = []
