@@ -34,42 +34,60 @@ function optionChanged(sample) {
     });
 
     var sampleValueUrl = "/samples/";
-    Plotly.d3.json(sampleValueUrl + sample, function(error, sampleIdsList) {
+    d3.json(sampleValueUrl + sample, function(error, sampleIdsList) {
         // otuIds = sampleIdsList[0].otu_ids;
         // sampleValues = sampleIdsList[0].sample_values;
         // console.log(otuIds);
         // console.log(sampleValues);
+
         var sampleValues = sampleIdsList[0].sample_values;
         var labelValues = sampleIdsList[0].otu_ids;
 
-        var data = [{
-            values: sampleValues,
-            labels: labelValues,
-            type: 'pie'
-        }];
-        
-        var layout = {
-        height: 350,
-        width: 400
-        };
-        
-        Plotly.newPlot('pieChart', data, layout);
+        var namesUrl = "/otu";
+        // d3.json(namesUrl, function(error, otuList) {
+        d3.json(namesUrl, function(error, otuDescList) {
+            // otuIds = otuList[0].otu_ids;
+            // otuDesc = otuList[0].otu_desc;
+            // console.log(otuIds);
+            // console.log(otuDesc);
+
+            var otuDescValues = [];
+            for (i=0; i<labelValues.length; i++) {
+                // otuIdx = otuIds.indexOf(labelValues[i]);
+                // otuDescValues.push(otuDesc[otuIdx]);
+                otuIdx = labelValues[i] - 1;
+                otuDescValues.push(otuDescList[otuIdx]);
+            }
+
+            // console.log(otuIdx);
+            // console.log(otuDescValues);
+
+            // var otuDesc = otuList[0].otu_desc;
+
+            var text = otuDescValues;
+            var data = [{
+                values: sampleValues,
+                labels: labelValues,
+                text: otuDescValues,
+                hoverinfo: 'label+text+value+percent',
+                type: 'pie'
+            }];
+            
+            var layout = {
+            height: 350,
+            width: 400
+            };
+            
+            Plotly.newPlot('pieChart', data, layout);
+        });
+
     });
 
-    // var testValues = [19, 26, 55];
-
-    var namesUrl = "/otu";
-    d3.json(namesUrl, function(error, otuList) {
-        // otuIds = otuList[0].otu_ids;
-        // otuDesc = otuList[0].otu_desc;
-        // console.log(otuIds);
-        // console.log(otuDesc);
-    });
-
+    // var sampleValues = [19, 26, 55];
     // var labelValues = ['Residential', 'Non-Residential', 'Utility'];
 
     // var data = [{
-    //     values: testValues,
+    //     values: sampleValues,
     //     labels: labelValues,
     //     type: 'pie'
     // }];

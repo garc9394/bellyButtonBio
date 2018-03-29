@@ -27,20 +27,27 @@ def getNames():
 
 @app.route('/otu')
 def otu():
-    otuIdList = []
+    # otuIdList = []
+    # otuDescList = []
+    # otuList = []
+    # otuDict = {}
+    # otuDesc = session.execute("SELECT otu_id, lowest_taxonomic_unit_found FROM otu").fetchall()
+    # for desc in otuDesc:
+    #     otuIdList.append(desc.otu_id)
+    #     otuDescList.append(desc.lowest_taxonomic_unit_found)
+
+    # otuDict = {"otu_ids": otuIdList, 
+    #             "otu_desc": otuDescList}
+    # otuList.append(otuDict)
+
+    # return jsonify(otuList)
+
     otuDescList = []
-    otuList = []
-    otuDict = {}
     otuDesc = session.execute("SELECT otu_id, lowest_taxonomic_unit_found FROM otu").fetchall()
     for desc in otuDesc:
-        otuIdList.append(desc.otu_id)
         otuDescList.append(desc.lowest_taxonomic_unit_found)
 
-    otuDict = {"otu_ids": otuIdList, 
-                "otu_desc": otuDescList}
-    otuList.append(otuDict)
-
-    return jsonify(otuList)
+    return jsonify(otuDescList)
 
 @app.route('/metadata/<sample>')
 def metadata(sample):
