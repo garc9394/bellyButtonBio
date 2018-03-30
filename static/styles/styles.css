@@ -1,39 +1,36 @@
 .title {
-    height: 200px;
-    background: lightgrey;
+    background: #f2f2f2;
     padding-top: 20px;
     text-align: center;
     font-weight: bold;
 }
 
+.panel-group {
+    width: 150px;
+}
+
 .sampleSel {
-    height: 60px;
-    width: 160px;
-    background: lightgrey;
-    border: 1px;
-    border-color: darkgrey;
-    margin: 15px;
+    height: 90px;
+    background: #f2f2f2;
     padding-top: 5px;
     text-align: center;
     font-weight: bold;
 }
 
-#sampleSummary {
-    width: 160px;
-    border: 1px;
-    border-color: steelblue;
-    margin: 15px;
-    padding-top: 5px;
-    padding-left: 6px;
-    font-weight: bold;
-    font-size: 9px;
-    list-style-type: none;
-}
-
-#sampleSummary p {
+#sampleSummaryTitle {
+    padding-top: 8px;
     text-align: center;
     font-weight: bold;
     font-size: 14px;
     color: white;
     background-color: steelblue;
+}
+
+#sampleSummary {
+    border: 1px;
+    border-color: steelblue;
+    padding: 5px 0;
+    font-weight: bold;
+    font-size: 10px;
+    list-style-type: none;
 }

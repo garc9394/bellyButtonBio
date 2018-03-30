@@ -12,51 +12,53 @@
 </head>
 <body>
     <div class="container">
-        <div class="row title">
+        <div class="row">
             <div class="col-md-12">
-                <h1>Belly Button Biodiversity</h1>
-                <h1>Dashboard</h1>
-                <p>Explore the dataset using interactive charts</p>
+                <div class="panel panel-default">
+                    <div class="panel-body title">
+                        <h1>Belly Button Biodiversity</h1>
+                        <h1>Dashboard</h1>
+                        <p>Explore the dataset using interactive charts</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row dashboard">
             <div class="col-md-2">
-                <div class="row selection">
-                    <div class="col-md-12 sampleSel">
-                        <p3>Select Sample:</p3>
-                        </br>
-                        <select id="selDataset" onchange="optionChanged(this.value)">
-                            <option value="" selected="selected"></option>
-                        </select>
+                <div class="panel-group">
+                    <div class="panel panel-default sampleSel">
+                        <div class="panel-body">
+                            <p3>Select Sample:</p3>
+                            </br>
+                            </br>
+                            <select id="selDataset" onchange="optionChanged(this.value)">
+                                <option value="" selected="selected"></option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="row metaData">
-                    <div id="sampleSummary">
-                        <p>Sample MetaData</p>
+                    <div class="panel panel-default">
+                        <div id="sampleSummaryTitle">
+                            <p>Sample MetaData</p>
+                        </div>
+                        <div class="panel-body sampleSummary">
+                            <div id="sampleSummary"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div id="pieChart"></div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div id="gaugeChart"></div>
             </div>
         </div>
+        <hr>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 bubbleChart">
                 <div id="bubbleChart"></div>
             </div>
         </div>
-
-        <!-- <div class="row dropdown">
-            <div class="col-md-4 sampleSel">
-                <select id="selDataset" onchange="optionChanged(this.value)">
-                    <option value="" selected="selected">Select Sample</option>
-                </select>
-                <script src="../static/js/Plotly.js"></script>
-            </div>
-        </div> -->
     </div>
     <script src="../static/js/Plotly.js"></script>
 </body>

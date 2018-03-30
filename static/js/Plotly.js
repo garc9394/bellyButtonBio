@@ -35,10 +35,6 @@ function optionChanged(sample) {
 
     var sampleValueUrl = "/samples/";
     d3.json(sampleValueUrl + sample, function(error, sampleIdsList) {
-        // otuIds = sampleIdsList[0].otu_ids;
-        // sampleValues = sampleIdsList[0].sample_values;
-        // console.log(otuIds);
-        // console.log(sampleValues);
 
         var sampleValues = [];
         var labelValues = [];
@@ -48,38 +44,25 @@ function optionChanged(sample) {
         }
 
         var namesUrl = "/otu";
-        // d3.json(namesUrl, function(error, otuList) {
         d3.json(namesUrl, function(error, otuDescList) {
-            // otuIds = otuList[0].otu_ids;
-            // otuDesc = otuList[0].otu_desc;
-            // console.log(otuIds);
-            // console.log(otuDesc);
 
             var otuDescValues = [];
             for (i=0; i<labelValues.length; i++) {
-                // otuIdx = otuIds.indexOf(labelValues[i]);
-                // otuDescValues.push(otuDesc[otuIdx]);
                 otuIdx = labelValues[i] - 1;
                 otuDescValues.push(otuDescList[otuIdx]);
             }
-
-            // console.log(otuIdx);
-            // console.log(otuDescValues);
-
-            // var otuDesc = otuList[0].otu_desc;
 
             var data = [{
                 values: sampleValues,
                 labels: labelValues,
                 text: otuDescValues,
                 textinfo: 'none',
-                // hoverinfo: 'label+text+value+percent',
                 type: 'pie'
             }];
             
             var layout = {
-            height: 350,
-            width: 400
+            height: 550,
+            width: 550
             };
             
             Plotly.newPlot('pieChart', data);
@@ -92,14 +75,12 @@ function optionChanged(sample) {
 
         var level = wfreq;
 
-        // Trig to calc meter point
         var degrees = 9 - level,
             radius = .5;
         var radians = degrees * Math.PI / 9;
         var x = radius * Math.cos(radians);
         var y = radius * Math.sin(radians);
 
-        // Path: may have to change to create a better triangle
         var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
             pathX = String(x),
             space = ' ',
@@ -142,9 +123,9 @@ function optionChanged(sample) {
                 color: '850000'
             }
             }],
-        title: 'Belly Button Washing Frequency Scrubs per Week',
-        height: 500,
-        width: 500,
+        title: 'Washing Frequency - Scrubs per Week',
+        height: 425,
+        width: 425,
         xaxis: {zeroline:false, showticklabels:false,
                     showgrid: false, range: [-1, 1]},
         yaxis: {zeroline:false, showticklabels:false,
@@ -176,8 +157,6 @@ function optionChanged(sample) {
             var trace1 = {
                 x: labelValues,
                 y: sampleValues,
-                // text: "(" + labelValues + ", " + sampleValues + ")" + otuDescValues,
-                // text: otuDescValues,
                 text: hoverText,
                 mode: 'markers',
                 marker: {
@@ -196,7 +175,7 @@ function optionChanged(sample) {
             var layout = {
                 showlegend: false,
                 height: 550,
-                width: 1000
+                width: 1050
               };
             
             Plotly.newPlot('bubbleChart', data, layout);
@@ -204,65 +183,4 @@ function optionChanged(sample) {
         });
 
     });
-
-    // var sampleValues = [19, 26, 55];
-    // var labelValues = ['Residential', 'Non-Residential', 'Utility'];
-
-    // var data = [{
-    //     values: sampleValues,
-    //     labels: labelValues,
-    //     type: 'pie'
-    // }];
-    
-    // var layout = {
-    // height: 350,
-    // width: 400
-    // };
-    
-    // Plotly.newPlot('pieChart', data, layout);
-
-    // var sampleValueUrl = "/samples/"
-
-    // // d3.select('#sampleValues').selectAll('li').remove();
-    // d3.select('#pieChart').selectAll('li').remove();
-
-    // d3.json(sampleValueUrl + sample, function(error, sampleIdsList) {
-
-    //     console.log(sampleIdsList);
-    //     // d3.select('#sampleValues')
-    //     // d3.select('#pieChart')
-    //     // .append('li').attr('id', '1st_value').text(sampleIdsList[1])
-
-    // });
-
-
-
-    /////////////////////////////////////
-    // for SQL query verification only //
-    /////////////////////////////////////
-
-    // var namesUrl = "/names";
-    // d3.json(namesUrl, function(error, samples) {
-    //     console.log(samples);
-    // });
-
-    // var namesUrl = "/otu";
-    // d3.json(namesUrl, function(error, otuList) {
-    //     console.log(otuList);
-    // });
-
-    // var sampleUrl = "/metadata/";
-    // d3.json(sampleUrl + sample, function(error, samplesData) {
-    //     console.log(samplesData);
-    // });
-
-    // var wfreqUrl = "/wfreq/";
-    // d3.json(wfreqUrl + sample, function(error, wfreq) {
-    //     console.log(wfreq);
-    // });
-
-    // var sampleValueUrl = "/samples/";
-    // d3.json(sampleValueUrl + sample, function(error, sampleIdsList) {
-    //     console.log(sampleIdsList);
-    // });
 }
